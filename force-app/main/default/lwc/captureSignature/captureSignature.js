@@ -4,6 +4,21 @@ import { LightningElement,api } from 'lwc';
 import saveSign from '@salesforce/apex/SignatureHelper.saveSign';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
+const options = [
+    {
+        value: 'Option 1',
+        label: 'Option 1'
+    },
+    {
+        value: 'Option 2',
+        label: 'Option 2'
+    },
+    {
+        value: 'Option 3',
+        label: 'Option 3'
+    },
+];
+
 //declaration of variables for calculations
 let isDownFlag, 
     isDotFlag = false,
@@ -29,6 +44,16 @@ export default class CapturequestedEventignature extends LightningElement {
         this.template.addEventListener('mousedown', this.handleMouseDown.bind(this));
         this.template.addEventListener('mouseup', this.handleMouseUp.bind(this));
         this.template.addEventListener('mouseout', this.handleMouseOut.bind(this));
+    }
+
+    options = options;
+
+    selectedOptionValue;
+    selectedOptionLabel;
+
+    handleOptionChange(event) {
+        this.selectedOptionValue = event.detail.value;
+        this.selectedOptionLabel = event.detail.label;
     }
 
     //retrieve canvase and context
